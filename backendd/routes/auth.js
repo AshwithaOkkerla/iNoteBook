@@ -11,8 +11,8 @@ const JWT_SECRET = "ashwithaisagoodgirl";
 router.post(
   "/createUser",
   [
-    body("email", "Enter a valid email").isEmail(),
     body("name", "Pls enter more than 3char").isLength({ min: 3 }),
+    body("email", "Enter a valid email").isEmail(),
     body("password", "Pls enter more than 6char").isLength({ min: 6 }),
   ],
   async (req, res) => {
