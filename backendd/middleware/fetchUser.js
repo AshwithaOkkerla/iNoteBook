@@ -11,7 +11,7 @@ const fetchUser = (req, res, next) => {
   try {
     const data = jwt.verify(token, JWT_SECRET);
     req.user = data.user;
-
+    console.log("Done fetching User")
     next();
   } catch (error) {
     res.status(401).send({ error: "Please authenticate using a valid token" });
