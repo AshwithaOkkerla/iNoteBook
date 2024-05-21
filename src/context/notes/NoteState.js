@@ -21,6 +21,42 @@ const NoteState = (props) => {
       date: "2024-05-21T02:51:40.026Z",
       __v: 0,
     },
+    {
+      _id: "664c0c3c4028113fa00bbd7a",
+      user: "664c0b2a4028113fa00bbd72",
+      title: "Chilling ",
+      description: "enjoyed summer hldys",
+      tag: "vacation",
+      date: "2024-05-21T02:51:40.026Z",
+      __v: 0,
+    },
+    {
+      _id: "664c0c3c4028113fa00bbd7a",
+      user: "664c0b2a4028113fa00bbd72",
+      title: "Chilling ",
+      description: "enjoyed summer hldys",
+      tag: "vacation",
+      date: "2024-05-21T02:51:40.026Z",
+      __v: 0,
+    },
+    {
+      _id: "664c0c3c4028113fa00bbd7a",
+      user: "664c0b2a4028113fa00bbd72",
+      title: "Chilling ",
+      description: "enjoyed summer hldys",
+      tag: "vacation",
+      date: "2024-05-21T02:51:40.026Z",
+      __v: 0,
+    },
+    {
+      _id: "664c0c3c4028113fa00bbd7a",
+      user: "664c0b2a4028113fa00bbd72",
+      title: "Chilling ",
+      description: "enjoyed summer hldys",
+      tag: "vacation",
+      date: "2024-05-21T02:51:40.026Z",
+      __v: 0,
+    },
   ];
 
   	const [notes,setNotes] = useState(notesInitial)
