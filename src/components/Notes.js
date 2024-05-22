@@ -1,30 +1,42 @@
-import React, { useContext, useEffect, useRef,useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Noteitem from "./Noteitem";
 import noteContext from "../context/notes/NoteContext";
 import AddNote from "./AddNote";
 const Notes = () => {
   const context = useContext(noteContext);
   console.log(context);
-  const { notes, fetchAllNotes } = context;
-  const [note,setNote] = useState({etitle:"",edescription:"",etag:"default"})
+  const { notes, fetchAllNotes,editNote } = context;
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "default",
+  });
   useEffect(() => {
     fetchAllNotes();
   }, []);
   const ref = useRef(null);
+  const refCloseClick = useRef(null);
 
   const updateNote = (currnote) => {
-	  ref.current.click();
-      setNote({etitle:currnote.title, edescription:currnote.description, etag:currnote.tag})
-	};
+    ref.current.click();
+    setNote({
+      id: currnote._id,
+      etitle: currnote.title,
+      edescription: currnote.description,
+      etag: currnote.tag,
+    });
+  };
   const handleClick = (e) => {
-	e.preventDefault();
-	console.log("updating node",note)	
-
+    e.preventDefault();
+    editNote(note.id,note.etitle,note.edescription,note.etag)
+    refCloseClick.current.click();
+    console.log("updating node", note);
   };
 
-  const onchange = (e)=>{
-	setNote({...note,[e.target.name]:e.target.value})
-  }
+  const onchange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
   return (
     <div>
       <AddNote />
@@ -73,7 +85,7 @@ const Notes = () => {
                     className="form-control"
                     id="etitle"
                     name="etitle"
-					value = {note.etitle}
+                    value={note.etitle}
                     onChange={onchange}
                   />
                 </div>
@@ -86,11 +98,9 @@ const Notes = () => {
                     className="form-control"
                     id="edescription"
                     name="edescription"
-					value={note.edescription}
-					
+                    value={note.edescription}
                     onChange={onchange}
                   />
-				  
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">
@@ -101,12 +111,10 @@ const Notes = () => {
                     className="form-control"
                     id="etag"
                     name="etag"
-					value={note.etag}
+                    value={note.etag}
                     onChange={onchange}
                   />
                 </div>
-
-                
               </form>
             </div>
             <div className="modal-footer">
@@ -114,10 +122,15 @@ const Notes = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-dismiss="modal"
+                ref={refCloseClick}
               >
                 Close
               </button>
-              <button onClick={handleClick} type="button" className="btn btn-primary">
+              <button
+                onClick={handleClick}
+                type="button"
+                className="btn btn-primary"
+              >
                 Update
               </button>
             </div>

@@ -16,9 +16,9 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY0YzBiMmE0MDI4MTEzZmEwMGJiZDcyIn0sImlhdCI6MTcxNjI1OTYyNn0.lD_y7eKUu_1xI-8mYMK88blbSyYUOHjdoxa86o0oIPE",
       },
     });
-    const json = await response.json()
-    console.log(json)
-    setNotes(json)
+    const json = await response.json();
+    console.log(json);
+    setNotes(json);
   };
   //ADd a note
   const addNote = async (title, description, tag) => {
@@ -33,7 +33,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const json = response.json();
-    console.log(json)
+    console.log(json);
 
     console.log("Adding a new note");
     const note = {
@@ -59,7 +59,7 @@ const NoteState = (props) => {
       },
     });
     const json = response.json();
-    console.log(json)
+    console.log(json);
 
     console.log("delete note with id: ", id);
     const newnotes = notes.filter((note) => {
@@ -80,19 +80,30 @@ const NoteState = (props) => {
 
       body: JSON.stringify({ title, description, tag }),
     });
-    const json = response.json();
-    for (let i = 0; i < notes.length; i++) {
-      const ele = notes[i];
+
+    const json = await response.json();
+    console.log(json);
+    //logic to edit in client side
+
+    let newnotes = JSON.parse(JSON.stringify(notes));
+
+    for (let i = 0; i < newnotes.length; i++) {
+      const ele = newnotes[i];
       if (ele._id === id) {
-        ele.title = title;
-        ele.description = description;
-        ele.tag = tag;
+        newnotes[i].title = title;
+        newnotes[i].description = description;
+        newnotes[i].tag = tag;
+        break;
       }
     }
+
+    setNotes(newnotes);
   };
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, delNote, editNote,fetchAllNotes }}>
+    <NoteContext.Provider
+      value={{ notes, addNote, delNote, editNote, fetchAllNotes }}
+    >
       {props.children}
     </NoteContext.Provider>
   );
