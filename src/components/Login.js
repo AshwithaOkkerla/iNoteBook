@@ -31,7 +31,8 @@ const Login = (props) => {
     setCred({...cred,[e.target.name]:e.target.value})
   }
   return (
-    <div>
+    <div className="mt-3">
+      <h2 className="my-3">Login </h2>
       <form onSubmit={handleSubimt}>
         <div className="mb-3">
           <label htmlFor="Email" className="form-label">
