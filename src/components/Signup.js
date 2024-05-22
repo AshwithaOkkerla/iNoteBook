@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom"
-const Singup = () => {
+const Signup = (props) => {
 
 	const [cred,setCred] = useState({name:"",email:"",password:"",cpassword:""});
 	let navigate = useNavigate();
@@ -17,10 +17,14 @@ const Singup = () => {
 		const json = await response.json()
 		console.log(json);
 	
-		
+		if(json.success){
 		  //save auth token and redirect to notes
 		  localStorage.setItem('token',json.authToken);
 		  navigate("/");
+      props.showAlert("Account created successfully","sucess")
+		}else{
+			props.showAlert("Invalid Credentials","danger")
+		}
 		
 	  };
 	
@@ -94,4 +98,4 @@ const Singup = () => {
   );
 };
 
-export default Singup;
+export default Signup;
